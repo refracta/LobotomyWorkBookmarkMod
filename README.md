@@ -1,46 +1,46 @@
-# LobotomyMacroMod2
+# LobotomyWorkBookmarkMod
 
-This repository contains the source code for `abcdcode_Macro_MOD`, an AgentCTRL-style command macro mod for Lobotomy Corporation.
-It is based on decompiled code from the original `Main File-365-1-0-1707710717 (3)` command macro mod and then modified.
+`refracta_WorkBookmark_MOD` is a companion mod for Lobotomy Corporation.
+It is designed to be used together with the original Command Macro mod and adds work bookmark hotkeys.
+
+## Demo
+
+![WorkBookmark Demo](demo.gif)
 
 ## Quick Usage
 
-- `Shift + Work command`: use the original repeating-work macro behavior.
-- `Insert`: save current moving/working agent -> abnormality -> work-type assignments.
-- `Shift + Insert`: print saved Insert assignments in the system log.
-- `Home`: apply saved Insert assignments to dispatchable agents.
-- `End`: cancel en-route assignments for agents saved by Insert.
+- `Insert`: save current moving/working agent -> abnormality -> work-type pairs.
+- `Shift + Insert`: print saved pairs in the system log.
+- `Home`: apply saved pairs to dispatchable agents.
+- `End`: cancel en-route work actions for saved agents.
 
-## 1. Source
+## Source
 
-- Core patch logic: `src/abcdcode_Macro_MOD/Harmony_Patch.cs`
-- Macro state helpers: `src/abcdcode_Macro_MOD/CreatureCheck.cs`, `src/abcdcode_Macro_MOD/MacroBurf.cs`, `src/abcdcode_Macro_MOD/MacroInfo.cs`
-- Assembly metadata: `src/abcdcode_Macro_MOD/AssemblyInfo.cs`
-- Project file: `src/abcdcode_Macro_MOD/abcdcode_Macro_MOD.csproj`
-- Mod info XML: `mod/Main File-365-1-0-1707710717 (3)/Info/kr/Info.xml`, `mod/Main File-365-1-0-1707710717 (3)/Info/en/Info.xml`
+- Core patch logic: `src/refracta_WorkBookmark_MOD/Harmony_Patch.cs`
+- Assembly metadata: `src/refracta_WorkBookmark_MOD/AssemblyInfo.cs`
+- Project file: `src/refracta_WorkBookmark_MOD/refracta_WorkBookmark_MOD.csproj`
+- Mod info XML: `mod/refracta_WorkBookmark_MOD/Info/kr/Info.xml`, `mod/refracta_WorkBookmark_MOD/Info/en/Info.xml`
 
-## 2. Build
+## Build
 
 ### Requirements
 
 - .NET SDK 8+
 - PowerShell
 
-### Local build
+### Package
 
 ```powershell
-./scripts/build.ps1 -Configuration Release
-```
-
-### Build + Deploy to game
-
-```powershell
-./scripts/deploy.ps1
+./scripts/package_workbookmark.ps1 -Configuration Release
 ```
 
 ### Output
 
-- DLL (build): `out/Release/abcdcode_Macro_MOD.dll`
-- ZIP package: `dist/Main File-365-1-0-1707710717 (3).zip`
-- Deploy archive (versioned): `release/*.zip`
+- DLL: `out/Release/refracta_WorkBookmark_MOD/refracta_WorkBookmark_MOD.dll`
+- ZIP package: `dist/refracta_WorkBookmark_MOD.zip`
 
+## CI/CD
+
+- Workflow: `.github/workflows/workbookmark-ci.yml`
+- Push/PR: build + artifact upload
+- Tag push (`workbookmark-v*`, `v*`): automatic GitHub Release with `refracta_WorkBookmark_MOD.zip`
